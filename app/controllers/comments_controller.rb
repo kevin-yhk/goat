@@ -9,15 +9,10 @@ class CommentsController < ApplicationController
         render json: @comment
     end
 
-    def create 
-        @comment = Comment.create(user_params)
-        render json: {message: "Comment Created"}
-    end
-
-    private 
-
-    def comment_params
-        params.permit(:name, :content)
+    def destroy
+        comment = Comment.find_by(id: params[:id])
+        comment.destroy
+        render json: comment
     end
 
 end
